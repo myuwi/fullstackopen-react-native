@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
-    gap: theme.spacing.lg,
+    gap: theme.spacing.xl,
     alignItems: "center",
   },
 });
