@@ -14,6 +14,7 @@ const Text = ({
     {
       color: theme.colors[color],
       fontSize: theme.fontSizes[size],
+      lineHeight: theme.lineHeights[size],
       fontWeight: theme.fontWeights[weight],
       fontFamily: theme.fonts[family],
     },
