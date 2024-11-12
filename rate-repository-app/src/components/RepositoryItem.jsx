@@ -1,6 +1,6 @@
 import { Image, StyleSheet, View } from "react-native";
-import theme from "../theme";
 import Text from "./Text";
+import theme from "../theme";
 
 const styles = StyleSheet.create({
   container: {
@@ -63,7 +63,9 @@ const RepositoryItem = ({ item }) => {
       <View style={styles.topContainer}>
         <Image source={{ uri: item.ownerAvatarUrl }} style={styles.avatar} />
         <View style={styles.infoContainer}>
-          <Text weight="bold" size="medium">{item.fullName}</Text>
+          <Text weight="bold" size="medium">
+            {item.fullName}
+          </Text>
           <Text color="muted">{item.description}</Text>
           <Badge>{item.language}</Badge>
         </View>

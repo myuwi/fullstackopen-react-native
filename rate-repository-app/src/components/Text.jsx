@@ -1,5 +1,4 @@
 import { Text as NativeText } from "react-native";
-
 import theme from "../theme";
 
 const Text = ({
