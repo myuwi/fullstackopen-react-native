@@ -1,8 +1,14 @@
 import { StyleSheet, View } from "react-native";
 import { Formik } from "formik";
-import TextInput from "./TextInput";
+import * as yup from "yup";
 import Button from "./Button";
+import TextField from "./TextField";
 import theme from "../theme";
+
+const validationSchema = yup.object().shape({
+  username: yup.string().required("Username is required"),
+  password: yup.string().required("Password is required"),
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -18,21 +24,15 @@ const SignIn = () => {
   return (
     <Formik
       initialValues={{ username: "", password: "" }}
+      validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ handleChange, handleBlur, handleSubmit, values }) => (
+      {({ handleSubmit }) => (
         <View style={styles.container}>
-          <TextInput
-            placeholder="Username"
-            onChangeText={handleChange("username")}
-            onBlur={handleBlur("username")}
-            value={values.username}
-          />
-          <TextInput
+          <TextField name="username" placeholder="Username" />
+          <TextField
+            name="password"
             placeholder="Password"
-            onChangeText={handleChange("password")}
-            onBlur={handleBlur("password")}
-            value={values.password}
             secureTextEntry={true}
           />
           <Button onPress={handleSubmit}>Sign in</Button>

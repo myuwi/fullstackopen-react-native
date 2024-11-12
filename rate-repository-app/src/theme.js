@@ -9,6 +9,7 @@ const theme = {
     onAccent: "#ffffff",
     muted: "#586069",
     outline: "#d1d5db",
+    error: "#d73a4a",
   },
   lineHeights: {
     body: 20,
