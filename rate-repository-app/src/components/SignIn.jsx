@@ -4,6 +4,7 @@ import * as yup from "yup";
 import Button from "./Button";
 import TextField from "./TextField";
 import theme from "../theme";
+import useSignIn from "../hooks/useSignIn";
 
 const validationSchema = yup.object().shape({
   username: yup.string().required("Username is required"),
@@ -19,7 +20,16 @@ const styles = StyleSheet.create({
 });
 
 const SignIn = () => {
-  const handleSubmit = (values) => console.log(values);
+  const [signIn] = useSignIn();
+
+  const handleSubmit = async ({ username, password }) => {
+    try {
+      const { data } = await signIn({ username, password });
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Formik
