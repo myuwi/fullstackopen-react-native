@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     gap: theme.spacing.md,
   },
   infoContainer: {
+    flex: 1,
     alignItems: "flex-start",
     gap: theme.spacing.sm,
   },
