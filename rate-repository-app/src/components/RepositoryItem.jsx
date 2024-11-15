@@ -38,20 +38,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const Badge = ({ children }) => {
+const Badge = ({ children, testID }) => {
   return (
-    <View style={styles.badge}>
+    <View style={styles.badge} testID={testID}>
       <Text color="onAccent">{children}</Text>
     </View>
   );
 };
 
-const Stat = ({ label, value }) => {
+const Stat = ({ label, value, testID }) => {
   const stat =
     value >= 1000 ? (value / 1000).toFixed(1).replace(".0", "") + "k" : value;
 
   return (
-    <View style={styles.stat}>
+    <View style={styles.stat} testID={testID}>
       <Text weight="bold">{stat}</Text>
       <Text color="muted">{label}</Text>
     </View>
@@ -60,22 +60,32 @@ const Stat = ({ label, value }) => {
 
 const RepositoryItem = ({ item }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="repositoryItem">
       <View style={styles.topContainer}>
         <Image source={{ uri: item.ownerAvatarUrl }} style={styles.avatar} />
         <View style={styles.infoContainer}>
-          <Text weight="bold" size="medium">
+          <Text weight="bold" size="medium" testID="fullName">
             {item.fullName}
           </Text>
-          <Text color="muted">{item.description}</Text>
-          <Badge>{item.language}</Badge>
+          <Text color="muted" testID="description">
+            {item.description}
+          </Text>
+          <Badge testID="language">{item.language}</Badge>
         </View>
       </View>
       <View style={styles.bottomContainer}>
-        <Stat label="Stars" value={item.stargazersCount} />
-        <Stat label="Forks" value={item.forksCount} />
-        <Stat label="Reviews" value={item.reviewCount} />
-        <Stat label="Rating" value={item.ratingAverage} />
+        <Stat
+          label="Stars"
+          value={item.stargazersCount}
+          testID="stargazersCount"
+        />
+        <Stat label="Forks" value={item.forksCount} testID="forksCount" />
+        <Stat label="Reviews" value={item.reviewCount} testID="reviewCount" />
+        <Stat
+          label="Rating"
+          value={item.ratingAverage}
+          testID="ratingAverage"
+        />
       </View>
     </View>
   );
