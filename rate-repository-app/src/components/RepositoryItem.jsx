@@ -2,15 +2,11 @@ import { Image, StyleSheet, View } from "react-native";
 import * as Linking from "expo-linking";
 
 import Button from "./Button";
+import Surface from "./Surface";
 import Text from "./Text";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.colors.surface,
-    padding: theme.spacing.md,
-    gap: theme.spacing.md,
-  },
   topContainer: {
     flexDirection: "row",
     gap: theme.spacing.md,
@@ -63,7 +59,7 @@ const Stat = ({ label, value, testID }) => {
 
 const RepositoryItem = ({ item, singleView }) => {
   return (
-    <View style={styles.container} testID="repositoryItem">
+    <Surface testID="repositoryItem">
       <View style={styles.topContainer}>
         <Image source={{ uri: item.ownerAvatarUrl }} style={styles.avatar} />
         <View style={styles.infoContainer}>
@@ -95,7 +91,7 @@ const RepositoryItem = ({ item, singleView }) => {
           Open in GitHub
         </Button>
       )}
-    </View>
+    </Surface>
   );
 };
 

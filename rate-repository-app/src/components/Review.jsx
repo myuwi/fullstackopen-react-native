@@ -1,12 +1,11 @@
-import { StyleSheet, View } from "react-native";
 import { useNavigate } from "react-router-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 
 import Button from "./Button";
+import Surface from "./Surface";
 import TextField from "./TextField";
 import useCreateReview from "../hooks/useCreateReview";
-import theme from "../theme";
 
 const validationSchema = yup.object().shape({
   ownerName: yup.string().required("Repository owner name is required"),
@@ -18,14 +17,6 @@ const validationSchema = yup.object().shape({
     .typeError("Rating must be a number between 0 and 100")
     .required("Rating is required"),
   text: yup.string(),
-});
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.colors.surface,
-    padding: theme.spacing.md,
-    gap: theme.spacing.md,
-  },
 });
 
 const ReviewForm = ({ onSubmit }) => {
@@ -41,13 +32,13 @@ const ReviewForm = ({ onSubmit }) => {
       onSubmit={onSubmit}
     >
       {({ handleSubmit }) => (
-        <View style={styles.container}>
+        <Surface>
           <TextField name="ownerName" placeholder="Repository owner name" />
           <TextField name="repositoryName" placeholder="Repository name" />
           <TextField name="rating" placeholder="Rating between 0 and 100" />
           <TextField name="text" placeholder="Review" />
           <Button onPress={handleSubmit}>Create a review</Button>
-        </View>
+        </Surface>
       )}
     </Formik>
   );

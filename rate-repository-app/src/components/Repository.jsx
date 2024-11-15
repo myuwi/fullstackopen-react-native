@@ -2,6 +2,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { useParams } from "react-router-native";
 import { format } from "date-fns";
 
+import Surface from "./Surface";
 import Text from "./Text";
 import RepositoryItem from "./RepositoryItem";
 import useRepository from "../hooks/useRepository";
@@ -13,9 +14,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: "row",
-    gap: theme.spacing.md,
-    padding: theme.spacing.md,
-    backgroundColor: theme.colors.surface,
   },
   topContainer: {
     flexDirection: "row",
@@ -39,7 +37,7 @@ const styles = StyleSheet.create({
 
 const Review = ({ data }) => {
   return (
-    <View style={styles.container}>
+    <Surface style={styles.container}>
       <View style={styles.rating}>
         <Text color="accent" size="medium" weight="bold">
           {data.rating}
@@ -54,7 +52,7 @@ const Review = ({ data }) => {
         </View>
         {data.text && <Text>{data.text}</Text>}
       </View>
-    </View>
+    </Surface>
   );
 };
 
