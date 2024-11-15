@@ -1,4 +1,7 @@
 import { Image, StyleSheet, View } from "react-native";
+import * as Linking from "expo-linking";
+
+import Button from "./Button";
 import Text from "./Text";
 import theme from "../theme";
 
@@ -58,7 +61,7 @@ const Stat = ({ label, value, testID }) => {
   );
 };
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, singleView }) => {
   return (
     <View style={styles.container} testID="repositoryItem">
       <View style={styles.topContainer}>
@@ -87,6 +90,11 @@ const RepositoryItem = ({ item }) => {
           testID="ratingAverage"
         />
       </View>
+      {singleView && (
+        <Button onPress={() => Linking.openURL(item.url)}>
+          Open in GitHub
+        </Button>
+      )}
     </View>
   );
 };
