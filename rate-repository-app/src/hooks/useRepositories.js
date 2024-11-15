@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_REPOSITORIES } from "../graphql/queries";
 
-const useRepositories = (order) => {
+const useRepositories = (query, order) => {
   const orderBy = order?.startsWith("rating") ? "RATING_AVERAGE" : "CREATED_AT";
   const orderDirection = order?.endsWith("Asc") ? "ASC" : "DESC";
 
@@ -10,6 +10,7 @@ const useRepositories = (order) => {
     variables: {
       orderBy,
       orderDirection,
+      searchKeyword: query,
     },
   });
 
