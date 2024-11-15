@@ -52,7 +52,7 @@ const Review = ({ data }) => {
           </Text>
           <Text color="muted">{format(data.createdAt, "dd.MM.yyyy")}</Text>
         </View>
-        <Text>{data.text}</Text>
+        {data.text && <Text>{data.text}</Text>}
       </View>
     </View>
   );
