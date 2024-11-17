@@ -1,68 +1,53 @@
-import { useNavigate } from "react-router-native";
-import { Formik } from "formik";
-import * as yup from "yup";
+import { StyleSheet, View } from "react-native";
+import { format } from "date-fns";
 
-import Button from "./Button";
 import Surface from "./Surface";
-import TextField from "./TextField";
-import useCreateReview from "../hooks/useCreateReview";
+import Text from "./Text";
+import theme from "../theme";
 
-const validationSchema = yup.object().shape({
-  ownerName: yup.string().required("Repository owner name is required"),
-  repositoryName: yup.string().required("Repository name is required"),
-  rating: yup
-    .number()
-    .min(0)
-    .max(100)
-    .typeError("Rating must be a number between 0 and 100")
-    .required("Rating is required"),
-  text: yup.string(),
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+  },
+  topContainer: {
+    flexDirection: "row",
+    gap: theme.spacing.md,
+  },
+  rating: {
+    width: theme.spacing.xxl,
+    height: theme.spacing.xxl,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: theme.colors.accent,
+    borderWidth: 2,
+    borderRadius: theme.spacing.lg,
+  },
+  infoContainer: {
+    flex: 1,
+    alignItems: "flex-start",
+    gap: theme.spacing.sm,
+  },
 });
 
-const ReviewForm = ({ onSubmit }) => {
+const Review = ({ data, userView }) => {
   return (
-    <Formik
-      initialValues={{
-        ownerName: "",
-        repositoryName: "",
-        rating: "",
-        text: "",
-      }}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ handleSubmit }) => (
-        <Surface>
-          <TextField name="ownerName" placeholder="Repository owner name" />
-          <TextField name="repositoryName" placeholder="Repository name" />
-          <TextField name="rating" placeholder="Rating between 0 and 100" />
-          <TextField name="text" placeholder="Review" />
-          <Button onPress={handleSubmit}>Create a review</Button>
-        </Surface>
-      )}
-    </Formik>
+    <Surface style={styles.container}>
+      <View style={styles.rating}>
+        <Text color="accent" size="medium" weight="bold">
+          {data.rating}
+        </Text>
+      </View>
+      <View style={styles.infoContainer}>
+        <View>
+          <Text weight="bold" size="medium">
+            {userView ? data.repository.fullName : data.user.username}
+          </Text>
+          <Text color="muted">{format(data.createdAt, "dd.MM.yyyy")}</Text>
+        </View>
+        {data.text && <Text>{data.text}</Text>}
+      </View>
+    </Surface>
   );
-};
-
-const Review = () => {
-  const navigate = useNavigate();
-  const [createReview] = useCreateReview();
-
-  const handleSubmit = async (values) => {
-    try {
-      const review = {
-        ...values,
-        rating: Number(values.rating),
-      };
-
-      await createReview(review);
-      navigate(`/repository/${values.ownerName}.${values.repositoryName}`);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  return <ReviewForm onSubmit={handleSubmit} />;
 };
 
 export default Review;

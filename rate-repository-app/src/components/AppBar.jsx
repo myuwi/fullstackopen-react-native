@@ -9,14 +9,13 @@ import theme from "../theme";
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "stretch",
     paddingTop: Constants.statusBarHeight,
     paddingHorizontal: 16,
     height: 64 + Constants.statusBarHeight,
     backgroundColor: theme.colors.primary,
   },
   scrollContainer: {
-    flex: 1,
     gap: theme.spacing.xl,
     alignItems: "center",
   },
@@ -53,6 +52,7 @@ const AppBar = () => {
         {me ? (
           <>
             <AppBarTab to="/review">Create a review</AppBarTab>
+            <AppBarTab to="/my-reviews">My reviews</AppBarTab>
             <AppBarButton onPress={signOut}>Sign out</AppBarButton>
           </>
         ) : (
