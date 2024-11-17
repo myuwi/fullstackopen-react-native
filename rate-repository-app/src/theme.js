@@ -12,6 +12,7 @@ const theme = {
     muted: "#586069",
     outline: "#d1d5db",
     error: "#d73a4a",
+    onError: "#ffffff",
   },
   lineHeights: {
     body: 20,

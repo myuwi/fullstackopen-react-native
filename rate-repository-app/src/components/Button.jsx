@@ -4,7 +4,6 @@ import theme from "../theme";
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: theme.colors.accent,
     height: 56,
     paddingHorizontal: theme.spacing.lg,
     flexDireciton: "row",
@@ -13,17 +12,32 @@ const styles = StyleSheet.create({
     borderRadius: theme.rounding.sm,
   },
   active: {
-    backgroundColor: theme.colors.accent + "E6",
+    opacity: 0.9,
+  },
+  variants: {
+    accent: {
+      button: { backgroundColor: theme.colors.accent },
+      text: { color: theme.colors.onAccent },
+    },
+    error: {
+      button: { backgroundColor: theme.colors.error },
+      text: { color: theme.colors.onError },
+    },
   },
 });
 
-const AppBar = ({ children, ...rest }) => {
+const AppBar = ({ children, style, variant = "accent", ...rest }) => {
   return (
     <Pressable
-      style={({ pressed }) => [styles.button, pressed && styles.active]}
+      style={({ pressed }) => [
+        styles.button,
+        styles.variants[variant].button,
+        pressed && styles.active,
+        style,
+      ]}
       {...rest}
     >
-      <Text color="onAccent" weight="bold">
+      <Text weight="bold" style={styles.variants[variant].text}>
         {children}
       </Text>
     </Pressable>

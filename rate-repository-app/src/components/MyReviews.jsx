@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 });
 
 const MyReviews = () => {
-  const { data: me } = useMe(true);
+  const { data: me, refetch } = useMe(true);
 
   const reviews = me?.reviews?.edges.map((edge) => edge.node) ?? [];
 
@@ -19,7 +19,9 @@ const MyReviews = () => {
     <FlatList
       data={reviews}
       contentContainerStyle={styles.list}
-      renderItem={({ item }) => <Review data={item} userView={true} />}
+      renderItem={({ item }) => (
+        <Review data={item} userView={true} onDelete={refetch} />
+      )}
     />
   );
 };
