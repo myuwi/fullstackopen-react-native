@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
 const Repository = () => {
   const { id } = useParams();
-  const { data: repository, loading } = useRepository(id);
+  const { data: repository, loading, fetchMore } = useRepository(id);
 
   if (loading) return <Text>Loading...</Text>;
 
@@ -27,6 +27,8 @@ const Repository = () => {
       renderItem={({ item }) => <Review data={item} />}
       keyExtractor={({ id }) => id}
       contentContainerStyle={styles.list}
+      onEndReached={fetchMore}
+      onEndReachedThreshold={0.5}
       ListHeaderComponent={() => (
         <RepositoryItem item={repository} singleView={true} />
       )}
